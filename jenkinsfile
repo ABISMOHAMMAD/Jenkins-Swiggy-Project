@@ -28,7 +28,7 @@ pipeline{
                     -Dsonar.projectKey=Swiggy \
                     -Dsonar.projectName=Swiggy \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url=http://localhost:9000
+                    -Dsonar.host.url=http://43.205.125.13:9000
                 """
             }
         }
