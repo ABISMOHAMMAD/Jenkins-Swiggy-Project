@@ -50,3 +50,11 @@ This project is a *Swiggy-clone* application deployment setup, built to demonstr
 
 ## Architecture
 
+[ Developer ] → [ GitHub Repository ]
+↓ (push / commit)
+[ Jenkins ] — on code change → steps:
+• Checkout code
+• Run install script
+• Build / test app
+• Build Docker image
+• Deploy to target server / environment
