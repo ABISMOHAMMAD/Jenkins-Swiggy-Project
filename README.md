@@ -1,3 +1,4 @@
+
 # Jenkins Project: Swiggy Clone App Deployment
 
 A sample **Swiggy Clone** application deployed with a **Jenkins CI/CD pipeline**.  
@@ -24,58 +25,49 @@ This project demonstrates automated build, test, and deployment using Jenkins, D
 
 ## 📂 Project Structure
 Jenkins-Project/
-├── Photos/ # media/screenshots
-├── public/ # static files
-├── src/ # source code
+├── Photos/
+├── public/ 
+├── src/
 ├── Dockerfile
 ├── install.sh
 ├── Jenkinsfile
 ├── package.json
 └── README.md
 
-yaml
-Copy code
-
 ---
 
 ## ⚙️ Setup & Installation
-1. **Clone repo**
-   ```bash
-   git clone https://github.com/Siyona-Patole/Jenkins-Project.git
-   cd Jenkins-Project
-Run setup
 
-bash
-Copy code
+- **Run setup**
+```bash
 ./install.sh
-Run locally
+```
 
-bash
-Copy code
+- **Run locally**
+
+```bash
 npm install
 npm start
-Or with Docker:
-
-bash
-Copy code
+```
+  **Or with Docker**
+```
 docker build -t swiggy-clone .
 docker run -p 3000:3000 swiggy-clone
-🔄 Jenkins Pipeline
+```
+
+---
+## 🔄 Jenkins Pipeline
 The Jenkinsfile automates:
+- Checkout code
+- Install dependencies
+- Run tests
+- Build Docker image
+- Deploy container
 
-Checkout code
+---
 
-Install dependencies
-
-Run tests
-
-Build Docker image
-
-Deploy container
-
-📌 Usage
+## 📌 Usage
 After deployment, access the app at:
-
-cpp
-Copy code
+```
 http://<server-ip>:3000
+```
