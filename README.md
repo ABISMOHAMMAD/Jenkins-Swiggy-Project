@@ -1,60 +1,77 @@
 # Jenkins Project: Swiggy Clone App Deployment
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
-
-## Table of Contents
-
-- [About](#about)  
-- [Features](#features)  
-- [Technology Stack](#technology-stack)  
-- [Architecture](#architecture)  
-- [Prerequisites](#prerequisites)  
-- [Setup and Installation](#setup-and-installation)  
-- [CI/CD Pipeline (Jenkinsfile)](#cicd-pipeline-jenkinsfile)  
-- [Usage](#usage)  
-- [Directory Structure](#directory-structure)  
-- [Contributing](#contributing)  
-- [License](#license)  
-- [Contact](#contact)
+A sample **Swiggy Clone** application deployed with a **Jenkins CI/CD pipeline**.  
+This project demonstrates automated build, test, and deployment using Jenkins, Docker, and Node.js.
 
 ---
 
-## About
-
-This project is a *Swiggy-clone* application deployment setup, built to demonstrate continuous integration and continuous deployment (CI/CD) using **Jenkins**. The project handles building, testing, and deploying a sample web app (frontend + backend) via a pipeline defined in a `Jenkinsfile`.
-
----
-
-## Features
-
-- Automated builds and deployments using Jenkins  
-- Docker support (Dockerfile included) for containerizing the app  
-- Shell scripts (`install.sh`) to set up/install dependencies  
-- Sample frontend + backend code (Node.js / JavaScript)  
-- Public assets, static content under `public/` directory  
-- Easy to extend and customize
+## 🚀 Features
+- CI/CD pipeline with Jenkins (`Jenkinsfile`)
+- Dockerized application (`Dockerfile`)
+- Install/setup script (`install.sh`)
+- Node.js based frontend & backend
+- Static assets in `public/`
 
 ---
 
-## Technology Stack
-
-| Component        | Technology / Tool        |
-|------------------|---------------------------|
-| Frontend / Backend | Node.js, JavaScript     |
-| Web assets        | HTML, CSS               |
-| CI/CD             | Jenkins                 |
-| Containerization  | Docker                  |
-| Shell scripting   | Bash / Shell scripts     |
+## 🛠️ Tech Stack
+- **CI/CD**: Jenkins  
+- **Backend/Frontend**: Node.js, JavaScript  
+- **Containerization**: Docker  
+- **Scripts**: Bash  
 
 ---
 
-## Architecture
+## 📂 Project Structure
+Jenkins-Project/
+├── Photos/ # media/screenshots
+├── public/ # static files
+├── src/ # source code
+├── Dockerfile
+├── install.sh
+├── Jenkinsfile
+├── package.json
+└── README.md
 
-[ Developer ] → [ GitHub Repository ]
-↓ (push / commit)
-[ Jenkins ] — on code change → steps:
-• Checkout code
-• Run install script
-• Build / test app
-• Build Docker image
-• Deploy to target server / environment
+
+---
+
+## ⚙️ Setup & Installation
+1. **Clone repo**
+   ```bash
+   git clone https://github.com/Siyona-Patole/Jenkins-Project.git
+   cd Jenkins-Project
+
+2. **Run setup**
+   ```bash
+  ./install.sh
+
+3. **Run locally**
+   ```bash
+  npm install
+  npm start
+  
+ **Or with Docker**
+   ```bash
+  docker build -t swiggy-clone .
+  docker run -p 3000:3000 swiggy-clone
+
+
+---
+
+## 🔄 Jenkins Pipeline
+- Checkout code
+- Install dependencies
+- Run test
+- Build docker image
+- Deploy container
+
+---
+
+## 📌 Usage
+- After deployement access the app at :
+
+ ```bash
+ http://<server-ip>:3000
+ 
+---
