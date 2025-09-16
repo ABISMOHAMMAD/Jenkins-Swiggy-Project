@@ -33,6 +33,8 @@ Jenkins-Project/
 ├── package.json
 └── README.md
 
+yaml
+Copy code
 
 ---
 
@@ -41,37 +43,39 @@ Jenkins-Project/
    ```bash
    git clone https://github.com/Siyona-Patole/Jenkins-Project.git
    cd Jenkins-Project
+Run setup
 
-2. **Run setup**
-   ```bash
-  ./install.sh
+bash
+Copy code
+./install.sh
+Run locally
 
-3. **Run locally**
-   ```bash
-  npm install
-  npm start
-  
- **Or with Docker**
-   ```bash
-  docker build -t swiggy-clone .
-  docker run -p 3000:3000 swiggy-clone
+bash
+Copy code
+npm install
+npm start
+Or with Docker:
 
+bash
+Copy code
+docker build -t swiggy-clone .
+docker run -p 3000:3000 swiggy-clone
+🔄 Jenkins Pipeline
+The Jenkinsfile automates:
 
----
+Checkout code
 
-## 🔄 Jenkins Pipeline
-- Checkout code
-- Install dependencies
-- Run test
-- Build docker image
-- Deploy container
+Install dependencies
 
----
+Run tests
 
-## 📌 Usage
-- After deployement access the app at :
+Build Docker image
 
- ```bash
- http://<server-ip>:3000
- 
----
+Deploy container
+
+📌 Usage
+After deployment, access the app at:
+
+cpp
+Copy code
+http://<server-ip>:3000
