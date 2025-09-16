@@ -16,10 +16,16 @@ This project demonstrates automated build, test, and deployment using Jenkins, D
 ---
 
 ## 🛠️ Tech Stack
-- **CI/CD**: Jenkins  
-- **Backend/Frontend**: Node.js, JavaScript  
-- **Containerization**: Docker  
-- **Scripts**: Bash  
+
+| Tool       | Purpose                           |
+|------------|-----------------------------------|
+| **Jenkins** | CI/CD Orchestration              |
+| **Git**     | Source Code Management           |
+| **SonarQube** | Code Quality & Static Analysis |
+| **Trivy**   | Security Vulnerability Scanning  |
+| **Docker**  | Containerization & Deployment    |
+| **Node.js** | Backend JavaScript Runtime       |
+| **npm**     | Package Dependency Manager       |
 
 ---
 
