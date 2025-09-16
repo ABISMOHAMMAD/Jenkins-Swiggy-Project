@@ -18,27 +18,18 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/Siyona-Patole/Jenkins-Project.git'
             }
         }
-        stage("SonarQube Analysis") {
-    steps {
-        withSonarQubeEnv('sonar-server') {
-            script {
-                def scannerHome = tool 'sonar-scanner'   // 'sonar-scanner' is the name you gave in Jenkins Global Tool Config
-                sh """
-                    ${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=Swiggy \
-                    -Dsonar.projectName=Swiggy \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://43.205.125.13:9000
-                """
+        stage("Sonarqube Analysis "){
+            steps{
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Swiggy \
+                    -Dsonar.projectKey=Swiggy '''
+                }
             }
         }
-    }
-}
-
         stage("quality gate"){
            steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar token' 
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
                 }
             } 
         }
