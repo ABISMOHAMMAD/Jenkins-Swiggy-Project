@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        SCANNER_HOME = tool 'sonar-scanner-5'   // New SonarScanner you registered in Jenkins
+        SCANNER_HOME = tool 'sonar-scanner-5'   // SonarScanner 5.0.1 you installed
     }
 
     stages {
@@ -28,10 +28,14 @@ pipeline {
                 withSonarQubeEnv('sonar-server') {
                     sh '''
                         echo "Using SonarQube at $SONAR_HOST_URL"
+                        echo "Token variable is set (masked): $SONAR_AUTH_TOKEN"
+
                         $SCANNER_HOME/bin/sonar-scanner \
                           -Dsonar.projectKey=Swiggy \
                           -Dsonar.projectName=Swiggy \
-                          -Dsonar.sources=.
+                          -Dsonar.sources=. \
+                          -Dsonar.host.url=$SONAR_HOST_URL \
+                          -Dsonar.login=$SONAR_AUTH_TOKEN
                     '''
                 }
             }
@@ -82,6 +86,12 @@ pipeline {
                     docker run -d --name swiggy -p 3000:3000 siyona/swiggy:latest
                 '''
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '*.txt', allowEmptyArchive: true
         }
     }
 }
