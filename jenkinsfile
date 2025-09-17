@@ -7,14 +7,13 @@ pipeline {
     }
 
     environment {
-        SCANNER_HOME = tool 'sonar-scanner-5'   // SonarScanner 5.0.1 you installed
+        SCANNER_HOME = tool 'sonar-scanner-5'
+        SONAR_AUTH_TOKEN = credentials('sonar-token')
     }
 
     stages {
         stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
+            steps { cleanWs() }
         }
 
         stage('Checkout from Git') {
@@ -27,9 +26,6 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh '''
-                        echo "Using SonarQube at $SONAR_HOST_URL"
-                        echo "Token variable is set (masked): $SONAR_AUTH_TOKEN"
-
                         $SCANNER_HOME/bin/sonar-scanner \
                           -Dsonar.projectKey=Swiggy \
                           -Dsonar.projectName=Swiggy \
@@ -50,21 +46,17 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            steps {
-                sh "npm install"
-            }
+            steps { sh "npm install" }
         }
 
         stage('TRIVY FS SCAN') {
-            steps {
-                sh "trivy fs . > trivyfs.txt"
-            }
+            steps { sh "trivy fs . > trivyfs.txt" }
         }
 
         stage("Docker Build & Push") {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
+                    withDockerRegistry(credentialsId: 'docker-creds') {
                         sh "docker build -t swiggy ."
                         sh "docker tag swiggy siyona/swiggy:latest"
                         sh "docker push siyona/swiggy:latest"
@@ -74,9 +66,7 @@ pipeline {
         }
 
         stage("TRIVY Image Scan") {
-            steps {
-                sh "trivy image siyona/swiggy:latest > trivy.txt"
-            }
+            steps { sh "trivy image siyona/swiggy:latest > trivy.txt" }
         }
 
         stage('Deploy to Container') {
