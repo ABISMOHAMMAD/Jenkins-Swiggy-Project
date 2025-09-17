@@ -8,12 +8,14 @@ pipeline {
 
     environment {
         SCANNER_HOME = tool 'sonar-scanner-5'
-        SONAR_AUTH_TOKEN = credentials('sonar-token')
+        SONAR_TOKEN  = credentials('sonar-token')   // Add this in Jenkins credentials
     }
 
     stages {
         stage('Clean Workspace') {
-            steps { cleanWs() }
+            steps {
+                cleanWs()
+            }
         }
 
         stage('Checkout from Git') {
@@ -26,12 +28,13 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh '''
+                        echo "Running SonarQube Scan..."
                         $SCANNER_HOME/bin/sonar-scanner \
                           -Dsonar.projectKey=Swiggy \
                           -Dsonar.projectName=Swiggy \
                           -Dsonar.sources=. \
                           -Dsonar.host.url=$SONAR_HOST_URL \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                          -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
             }
@@ -46,11 +49,15 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            steps { sh "npm install" }
+            steps {
+                sh "npm install"
+            }
         }
 
         stage('TRIVY FS SCAN') {
-            steps { sh "trivy fs . > trivyfs.txt" }
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
         }
 
         stage("Docker Build & Push") {
@@ -66,7 +73,9 @@ pipeline {
         }
 
         stage("TRIVY Image Scan") {
-            steps { sh "trivy image siyona/swiggy:latest > trivy.txt" }
+            steps {
+                sh "trivy image siyona/swiggy:latest > trivy.txt"
+            }
         }
 
         stage('Deploy to Container') {
