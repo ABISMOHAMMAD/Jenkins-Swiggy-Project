@@ -19,7 +19,7 @@ pipeline {
 
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/Siyona-Patole/Jenkins-Project.git'
+                git branch: 'main', url: 'https://github.com/ABISMOHAMMAD/Jenkins-Swiggy-Project.git'
             }
         }
 
