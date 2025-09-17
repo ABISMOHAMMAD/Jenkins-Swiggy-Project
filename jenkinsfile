@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        SCANNER_HOME = tool 'sonar-scanner'
+        SCANNER_HOME = tool 'sonar-scanner-5'   // New SonarScanner you registered in Jenkins
     }
 
     stages {
@@ -27,14 +27,11 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh '''
-                        echo "SONAR_HOST_URL=$SONAR_HOST_URL"
-                        echo "SONAR_AUTH_TOKEN=$SONAR_AUTH_TOKEN"
-                        
+                        echo "Using SonarQube at $SONAR_HOST_URL"
                         $SCANNER_HOME/bin/sonar-scanner \
                           -Dsonar.projectKey=Swiggy \
                           -Dsonar.projectName=Swiggy \
-                          -Dsonar.sources=. \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                          -Dsonar.sources=.
                     '''
                 }
             }
