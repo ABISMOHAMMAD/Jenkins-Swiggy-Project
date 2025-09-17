@@ -65,8 +65,8 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-creds') {
                         sh "docker build -t swiggy ."
-                        sh "docker tag swiggy siyona/swiggy:latest"
-                        sh "docker push siyona/swiggy:latest"
+                        sh "docker tag swiggy abismohammad/swiggy:latest"
+                        sh "docker push abismohammad/swiggy:latest"
                     }
                 }
             }
@@ -74,7 +74,7 @@ pipeline {
 
         stage("TRIVY Image Scan") {
             steps {
-                sh "trivy image siyona/swiggy:latest > trivy.txt"
+                sh "trivy image abismohammad/swiggy:latest > trivy.txt"
             }
         }
 
@@ -82,7 +82,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f swiggy || true
-                    docker run -d --name swiggy -p 3000:3000 siyona/swiggy:latest
+                    docker run -d --name swiggy -p 3000:3000 abismohammad/swiggy:latest
                 '''
             }
         }
