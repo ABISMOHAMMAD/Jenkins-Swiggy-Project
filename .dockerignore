@@ -4,7 +4,7 @@ Dockerfile
 .dockerignore
 .git
 .gitignore
-README.md
-*.txt
 Photos
+*.log
+README.md
 

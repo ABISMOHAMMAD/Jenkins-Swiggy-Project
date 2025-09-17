@@ -1,23 +1,25 @@
-# Using Node.js 16 as the base image
-FROM node:16
-
-# Setting up the working directory
+# Stage 1: Build React app
+FROM node:16-slim AS build
 WORKDIR /app
 
-# Copying the package.json and package-lock.json files to the working directory
+# Install dependencies (better cache usage)
 COPY package*.json ./
+RUN npm install --production
 
-# Installation of npm dependency
-RUN npm install
-
-# Copy the application code
+# Copy source and build
 COPY . .
-
-# Buildinf of the React app
 RUN npm run build
 
-# Expose port 3000 to access app
+# Stage 2: Production (lightweight)
+FROM node:16-slim
+WORKDIR /app
+
+# Copy only the built app & dependencies
+COPY --from=build /app /app
+
+# Expose app port
 EXPOSE 3000
 
-# Start your Node.js server
+# Run your app
 CMD ["npm", "start"]
+
